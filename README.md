@@ -45,7 +45,7 @@
     - Pillow
     - requests
     - pandas
-
+    - re
     Then to create the visualization:
 
     python3 makeshotmap.py "First Last"
