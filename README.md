@@ -12,6 +12,7 @@
 - re
 - Pillow
 - Pandas
+- progress
 
 ### Milestones
 - Getting the data from the website
