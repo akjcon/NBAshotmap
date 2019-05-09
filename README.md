@@ -45,6 +45,8 @@
     - Pillow
     - requests
     - pandas
+    - re
+    - progress
 
     Then to create the visualization:
 

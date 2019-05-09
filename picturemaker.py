@@ -5,6 +5,8 @@ import sys
 from colorsys import rgb_to_hls, hls_to_rgb
 import urllib.request
 
+## BUG: grabimage needs a permanent fix for player image URL date
+
 class Boxes:
     """The class boxes creates a different box object at each spot on the basketball court."""
 
@@ -36,8 +38,8 @@ class Boxes:
 
 def grabimage(formattedname):
     """Grabs the players image off of Basketball-Reference"""
-    urllib.request.urlretrieve("https://d2cwpp38twqe55.cloudfront.net/req/201612011/images/players/" + formattedname.lower() + ".png", "playerpic.png")
-
+    urllib.request.urlretrieve("https://d2cwpp38twqe55.cloudfront.net/req/201902151/images/players/" + formattedname.lower() + ".jpg", "playerpic.png")
+    
 def addshots(filename,maptype):
     """Creates square box objects every 20 pixels, colors, and maps them onto the court."""
     im = Image.open('nbahalfcourt.png') #base half court map

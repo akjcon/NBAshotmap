@@ -1,6 +1,8 @@
 import sys
 import requests
 import re
+import datetime
+from progress.bar import Bar
 
 def __init__(self):
     self._playername = ""
@@ -16,7 +18,7 @@ def player_list(name):
 
 def get_data_page(formattedname,year):
     url = "http://www.basketball-reference.com/players/" + formattedname[0] + "/" + formattedname + "/shooting/20" + str(year).zfill(2) #find real url format when on internet
-    print("Loading data from: 20" + str(year).zfill(2))
+    #print("Loading data from: 20" + str(year).zfill(2))
     r = requests.get(url) #get page info
     if r.status_code != requests.codes.ok: # bad HTTP code
         return None
@@ -28,7 +30,7 @@ def validate_data(shooting_data):
     regexcheck = re.compile(REGEXcheck)
     regexchecker = re.findall(REGEXcheck, shooting_data)
     if regexchecker != []: #if player was not active during 2016
-        print("Player does not have shooting data")
+        #print("Player does not have shooting data")
         return False
     return True
 
@@ -49,16 +51,18 @@ def get_postions(formattedname):
     '''formattedname is a name like "jamesle01"s for the name inputted
     writes a file for the player titled the players name. each file has the positional
     and all other data in it'''
-    #REGEXdata = '''<div style="top:([0-9]{1,3})px;left:([0-9]{1,3})px;"\stip="[a-zA-Z]{3}\s[0-9]{1,2},\s20[0-9]{2},\s[a-zA-Z\s]{10}<br>[0-9a-zA-Z\s]{7},\s[0-9:]{4,5}\sremaining<br>(Missed|Made)''' # get text of locations from website source code
-    #REGEXcheck = "No shooting splits using these criteria"
+
     with open(formattedname, "w") as fout: #writes a file with the name of the player in arg for with all the data in it
         fout.write("from_top,left,missed_or_made\n")
-        for i in range(16): #just from 2010-2016 for now
+        curryear = datetime.datetime.now().year % 100 #gets last three digits of year
+        bar = Bar('Loading Player Data', max=curryear)
+        for i in range(curryear): #from 2000-2xxx
             pagetext = get_data_page(formattedname,i)
-            #print(pagetext)
+            bar.next()
             if validate_data(pagetext):
-                print("validated")
+                #print("validated")
                 write_data(pagetext,fout)
-
+        bar.finish()
+        print("Creating Shotmap...")
 if __name__ == '__main__':
     get_postions(sys.argv[1])
