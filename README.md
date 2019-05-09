@@ -47,11 +47,8 @@
     - requests
     - pandas
     - re
-<<<<<<< HEAD
     - progress
-
-=======
->>>>>>> 658ce681a45c0fd5219701a609548f3e9fec1915
+    
     Then to create the visualization:
 
     python3 makeshotmap.py "First Last"
