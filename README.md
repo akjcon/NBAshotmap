@@ -41,13 +41,17 @@
     Answer: We really wanted to use HSL but we couldn't figure out a way to do it. I think another big question of ours was how we could've approached the problem using matplotlib. Lastly, how could we incorporate freethrows into our data?
 
 ## Instructions to run the code
-    Answer: In the project folder after activating pyvenv install requests, pillows, and pandas. After doing that you can simply type:
+    Once the repository is cloned, you must install/have installed the following dependencies (you can 'pip install foo' to install these'):
+    - Pillow
+    - requests
+    - pandas
+
+    Then to create the visualization:
+
+    python3 makeshotmap.py "First Last"
 
 
-    python3 picturemaker.py "First Last"
-
-
-    with first being a players first name and last being their surname. It may take a while to grab the data, probably two or three minutes, but after that your set!
+    with first being a players first name and last being their surname. It may take a while to grab the data, probably two or three minutes, but after that you're set!
 
 ---
 
